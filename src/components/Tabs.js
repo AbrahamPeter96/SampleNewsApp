@@ -8,18 +8,18 @@ import {
   Button,
   Image,
 } from "semantic-ui-react";
-import Cards from "./Card";
+import Cards from "./Cards";
 import { TopNewsContext } from "../context/Topnewscontext";
 const Tabs = () => {
   const { topNews, searchByTitle } = useContext(TopNewsContext);
 
   const [activeItem, setActiveItem] = useState("Top News");
-  const [activeRadio, setActiveRadio] = useState("gb");
+  const [selectedCountry, setSelectedCountry] = useState("gb");
   const [selectedNews, setSelectedNews] = useState();
   const [searchTitle, setSearchTitle] = useState("");
 
   const handleItemClick = (e, { name }) => setActiveItem(name);
-  const handleChange = (e, { value }) => setActiveRadio(value);
+  const handleChange = (e, { value }) => setSelectedCountry(value);
   const handleSearchChange = (e) => setSearchTitle(e.target.value);
   const handleNewsClick = (newsDetail) => setSelectedNews(newsDetail);
 
@@ -30,8 +30,8 @@ const Tabs = () => {
   };
 
   useEffect(() => {
-    topNews(activeRadio);
-  }, [activeRadio]);
+    topNews(selectedCountry);
+  }, [selectedCountry]);
 
   return (
     <div>
@@ -60,7 +60,7 @@ const Tabs = () => {
                     label="GB"
                     name="radioGroup"
                     value="gb"
-                    checked={activeRadio === "gb"}
+                    checked={selectedCountry === "gb"}
                     onChange={handleChange}
                   />
                 </Form.Field>
@@ -69,7 +69,7 @@ const Tabs = () => {
                     label="US"
                     name="radioGroup"
                     value="us"
-                    checked={activeRadio === "us"}
+                    checked={selectedCountry === "us"}
                     onChange={handleChange}
                   />
                 </Form.Field>
@@ -88,7 +88,7 @@ const Tabs = () => {
         </>
       ) : activeItem === "Top News" ? (
         <Segment>
-          <Cards country={activeRadio} handleClick={handleNewsClick} />
+          <Cards country={selectedCountry} handleClick={handleNewsClick} />
         </Segment>
       ) : activeItem === "Search" ? (
         <Segment>
@@ -105,7 +105,7 @@ const Tabs = () => {
           <Cards handleClick={handleNewsClick} />
         </Segment>
       ) : (
-        <div></div>
+        <div>Nothing to show</div>
       )}
     </div>
   );

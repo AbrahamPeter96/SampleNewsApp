@@ -7,8 +7,7 @@ const Cards = ({ country, handleClick }) => {
   const [currentPageNews, setCurrentPageNews] = useState([]);
   const { news, searchNews } = useContext(TopNewsContext);
   useEffect(() => {
-    console.log(searchNews);
-    if (searchNews.length > 0 && !  country) {
+    if (searchNews.length > 0 && !country) {
       setCurrentPageNews(searchNews.slice(0, 10));
     } else {
       setCurrentPageNews(news.slice(0, 10));
@@ -16,7 +15,6 @@ const Cards = ({ country, handleClick }) => {
   }, [news, searchNews]);
 
   const handlePageChange = (e, { activePage }) => {
-    console.log(activePage);
     if (country) {
       setCurrentPageNews(
         news.slice((activePage - 1) * limit, activePage * limit)
