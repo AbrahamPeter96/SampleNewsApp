@@ -57,7 +57,7 @@ const Cards = ({ country, handleClick }) => {
       <div style={{ marginTop: 20 }}>
         <Pagination
           defaultActivePage={1}
-          totalPages={news.length / limit}
+          totalPages={country ? news.length / limit : searchNews.length / limit}
           onPageChange={handlePageChange}
         />
       </div>
