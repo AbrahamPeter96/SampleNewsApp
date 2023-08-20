@@ -12,7 +12,7 @@ const Cards = ({ country, handleClick }) => {
     } else {
       setCurrentPageNews(news.slice(0, 10));
     }
-  }, [news, searchNews]);
+  }, [news, searchNews, country]);
 
   const handlePageChange = (e, { activePage }) => {
     if (country) {
